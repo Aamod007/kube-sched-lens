@@ -1,80 +1,104 @@
-# kube-sched-lens
+# 🔍 kube-sched-lens
 
-**A desktop debugger for GPU/accelerator scheduling on Kubernetes with Dynamic Resource Allocation (DRA).**
+<div align="center">
+  <p><strong>A desktop debugger for GPU/accelerator scheduling on Kubernetes with Dynamic Resource Allocation (DRA).</strong></p>
+  
+  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+  [![Kubernetes](https://img.shields.io/badge/Kubernetes-%E2%89%A51.34-326ce5?logo=kubernetes&logoColor=white)](https://kubernetes.io)
+  [![Electron](https://img.shields.io/badge/Electron-App-47848F?logo=electron&logoColor=white)](https://www.electronjs.org/)
+</div>
 
-When a Pod that requests a GPU sits in `Pending`, the answer is scattered across four
-`resource.k8s.io/v1` objects (DeviceClass, ResourceSlice, ResourceClaim, ResourceClaimTemplate),
-scheduler events, and node capacity. kube-sched-lens joins all of them live and tells you **why**
-— in one sentence, with the evidence attached.
+---
 
-![screenshot placeholder](docs/screenshot.png)
+When a Pod that requests a GPU sits in `Pending`, the answer is often scattered across four distinct `resource.k8s.io/v1` objects (`DeviceClass`, `ResourceSlice`, `ResourceClaim`, `ResourceClaimTemplate`), scheduler events, and node capacities. 
 
-## What it does
+**kube-sched-lens** brings all of this information together in real-time. It provides a straightforward diagnosis for scheduling failures—summarized in one sentence—with all the supporting evidence attached.
 
-- **Pending Pods** — live table of every Pending pod with a diagnosed category:
-  `unallocated-claim`, `no-matching-device`, `insufficient-capacity`, `taint`, `affinity`, `unknown`.
-- **Diagnosis** — per-pod verdict: one-sentence summary, a suggestion, and the evidence trail
-  (scheduler events, claim allocation status, matching/missing ResourceSlice devices).
-- **GPU Capacity** — per driver/pool/node device inventory from ResourceSlices, with
-  allocated vs. free counts derived from allocated ResourceClaims.
+![kube-sched-lens screenshot](docs/screenshot.png)
 
-Updates stream over WebSocket from client-go informers — no polling, no `kubectl` round-trips.
+## ✨ Key Features
 
-## Architecture
+- **Live Pending Pods Table:** Instantly view every `Pending` pod categorized by diagnosis: 
+  `unallocated-claim`, `no-matching-device`, `insufficient-capacity`, `taint`, `affinity`, or `unknown`.
+- **Intelligent Diagnosis:** Each pod gets a clear, one-sentence summary explaining exactly why it's pending, an actionable suggestion, and a complete evidence trail (including scheduler events, claim allocation status, and matching/missing `ResourceSlice` devices).
+- **GPU Capacity Inventory:** Get a detailed per-driver, per-pool, and per-node device inventory derived from `ResourceSlices`, comparing allocated versus free counts based on active `ResourceClaims`.
+- **Real-time Streaming:** Updates stream instantly over WebSockets via client-go informers. No manual polling or slow `kubectl` round-trips!
 
+## 🏗 Architecture
+
+The app is built using a modern decoupled architecture:
+
+```mermaid
+flowchart LR
+    subgraph Frontend["Electron App"]
+        direction TB
+        UI["React/TS Renderer\n(3 Live Views)"]
+    end
+
+    subgraph Backend["Go Backend"]
+        Server["Go Server\n(Child Process, port 8151)"]
+    end
+
+    subgraph K8s["Kubernetes Cluster"]
+        direction TB
+        Informers["client-go informers"]
+        Objects["Pods, Events, Nodes\nresource.k8s.io/v1 API"]
+    end
+
+    UI <--"REST + WebSocket"--> Server
+    Server --"Watches state"--> Informers
+    Informers --"Reads"--> Objects
 ```
-┌──────────────────────────── Electron app ───────────────────────────┐
-│  React/TS renderer  ── REST + WebSocket ──►  Go backend (child     │
-│  (3 views)                                   process, port 8151)   │
-└─────────────────────────────────────────────────────┬──────────────┘
-                                                      │ client-go informers
-                                                      ▼
-                        Pods · Events · Nodes · resource.k8s.io/v1
-                        (DeviceClass, ResourceSlice, ResourceClaim,
-                         ResourceClaimTemplate)
-```
 
-- **Backend** (Go): client-go informers keep an in-memory index; a diagnosis engine
-  cross-references FailedScheduling events with claim allocation state and slice inventory.
-- **Frontend** (Electron + Vite + React/TS): spawns the backend as a child process,
-  renders live state over WebSocket.
+- **Backend (Go):** client-go informers maintain a live in-memory index. The diagnosis engine cross-references `FailedScheduling` events with claim allocation states and slice inventory.
+- **Frontend (Electron + Vite + React/TS):** Spawns the backend as a lightweight child process and beautifully renders the live state.
 
-## Quickstart
+## 🚀 Quickstart
 
-### Demo mode (no cluster needed)
+### Demo Mode (No Cluster Needed)
 
-```sh
+Want to see it in action without a cluster? We've got a demo mode configured with fixtures modeled on a kind cluster running the upstream [dra-example-driver](https://github.com/kubernetes-sigs/dra-example-driver), including a deliberately stuck, unallocatable `ResourceClaim`.
+
+```bash
+# Terminal 1: Run the backend in demo mode
 go run ./cmd/kube-sched-lens --demo
-cd app && npm install && npm run dev
+
+# Terminal 2: Start the frontend dev server
+cd app
+npm install
+npm run dev
 ```
 
-Demo fixtures are modeled on a kind cluster running the upstream
-[dra-example-driver](https://github.com/kubernetes-sigs/dra-example-driver), including a
-deliberately stuck, unallocatable ResourceClaim.
+### Real Cluster Mode
 
-### Against a real cluster
+_Requires Kubernetes ≥ 1.34 (DRA GA, `resource.k8s.io/v1`)._
 
-Requires Kubernetes ≥ 1.34 (DRA GA, `resource.k8s.io/v1`).
+```bash
+# Terminal 1: Run against your active kubeconfig
+go run ./cmd/kube-sched-lens
 
-```sh
-go run ./cmd/kube-sched-lens            # uses your kubeconfig
-cd app && npm run dev
+# Terminal 2: Start the frontend dev server
+cd app
+npm run dev
 ```
 
-## Development
+## 🛠 Development
 
-```sh
-go test ./...        # diagnosis engine unit tests
-cd app && npm run build
+Running tests for the diagnosis engine:
+```bash
+go test ./...
 ```
 
-## Why this exists
+Building the production Electron app:
+```bash
+cd app
+npm run build
+```
 
-Built while preparing a proposal for the LFX mentorship
-[*Adding Dynamic Resource Allocation (DRA) to Headlamp*](https://github.com/kubernetes-sigs/headlamp)
-— as a from-scratch exploration of the same problem space: making the DRA object graph
-navigable and debuggable for humans.
+## 💡 Motivation
 
-## License
+Built while preparing a proposal for the LFX mentorship: [*Adding Dynamic Resource Allocation (DRA) to Headlamp*](https://github.com/kubernetes-sigs/headlamp). This served as a from-scratch exploration of the same problem space: making the massive DRA object graph easily navigable and debuggable for humans.
 
-Apache-2.0
+## 📄 License
+
+Licensed under [Apache-2.0](LICENSE).

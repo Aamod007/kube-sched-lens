@@ -4,3 +4,4 @@ app/out/
 bin/
 coverage/
 *.exe
+*.zip
