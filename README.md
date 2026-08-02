@@ -1,4 +1,4 @@
-# 🔍 kube-sched-lens
+# kube-sched-lens
 
 <div align="center">
   <p><strong>A desktop debugger for GPU/accelerator scheduling on Kubernetes with Dynamic Resource Allocation (DRA).</strong></p>
@@ -16,7 +16,7 @@ When a Pod that requests a GPU sits in `Pending`, the answer is often scattered 
 
 ![kube-sched-lens screenshot](docs/screenshot.png)
 
-## ✨ Key Features
+## Key Features
 
 - **Live Pending Pods Table:** Instantly view every `Pending` pod categorized by diagnosis: 
   `unallocated-claim`, `no-matching-device`, `insufficient-capacity`, `taint`, `affinity`, or `unknown`.
@@ -24,7 +24,7 @@ When a Pod that requests a GPU sits in `Pending`, the answer is often scattered 
 - **GPU Capacity Inventory:** Get a detailed per-driver, per-pool, and per-node device inventory derived from `ResourceSlices`, comparing allocated versus free counts based on active `ResourceClaims`.
 - **Real-time Streaming:** Updates stream instantly over WebSockets via client-go informers. No manual polling or slow `kubectl` round-trips!
 
-## 🏗 Architecture
+## Architecture
 
 The app is built using a modern decoupled architecture:
 
@@ -53,7 +53,7 @@ flowchart LR
 - **Backend (Go):** client-go informers maintain a live in-memory index. The diagnosis engine cross-references `FailedScheduling` events with claim allocation states and slice inventory.
 - **Frontend (Electron + Vite + React/TS):** Spawns the backend as a lightweight child process and beautifully renders the live state.
 
-## 🚀 Quickstart
+## Quickstart
 
 ### Demo Mode (No Cluster Needed)
 
@@ -82,7 +82,7 @@ cd app
 npm run dev
 ```
 
-## 🛠 Development
+## Development
 
 Running tests for the diagnosis engine:
 ```bash
@@ -95,10 +95,10 @@ cd app
 npm run build
 ```
 
-## 💡 Motivation
+## Motivation
 
 Built while preparing a proposal for the LFX mentorship: [*Adding Dynamic Resource Allocation (DRA) to Headlamp*](https://github.com/kubernetes-sigs/headlamp). This served as a from-scratch exploration of the same problem space: making the massive DRA object graph easily navigable and debuggable for humans.
 
-## 📄 License
+## License
 
 Licensed under [Apache-2.0](LICENSE).
