@@ -1,0 +1,32 @@
+[
+ {
+  "metadata": {
+   "name": "fpga-pod-stuck.evt1",
+   "namespace": "default"
+  },
+  "involvedObject": {
+   "kind": "Pod",
+   "namespace": "default",
+   "name": "fpga-pod-stuck"
+  },
+  "reason": "FailedScheduling",
+  "type": "Warning",
+  "message": "0/2 nodes are available: 2 cannot allocate all claims. still not schedulable, preemption: 0/2 nodes are available: 2 Preemption is not helpful for scheduling.",
+  "count": 12
+ },
+ {
+  "metadata": {
+   "name": "cpu-hungry-pod.evt1",
+   "namespace": "default"
+  },
+  "involvedObject": {
+   "kind": "Pod",
+   "namespace": "default",
+   "name": "cpu-hungry-pod"
+  },
+  "reason": "FailedScheduling",
+  "type": "Warning",
+  "message": "0/2 nodes are available: 2 Insufficient cpu. preemption: 0/2 nodes are available: 2 No preemption victims found for incoming pod.",
+  "count": 7
+ }
+]

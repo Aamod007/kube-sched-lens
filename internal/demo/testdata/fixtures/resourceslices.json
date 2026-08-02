@@ -1,0 +1,306 @@
+[
+ {
+  "metadata": {
+   "name": "kind-worker-gpu.example.com"
+  },
+  "spec": {
+   "driver": "gpu.example.com",
+   "pool": {
+    "name": "kind-worker",
+    "generation": 1,
+    "resourceSliceCount": 1
+   },
+   "nodeName": "kind-worker",
+   "devices": [
+    {
+     "name": "gpu-0",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 0
+      }
+     }
+    },
+    {
+     "name": "gpu-1",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 1
+      }
+     }
+    },
+    {
+     "name": "gpu-2",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 2
+      }
+     }
+    },
+    {
+     "name": "gpu-3",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 3
+      }
+     }
+    },
+    {
+     "name": "gpu-4",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 4
+      }
+     }
+    },
+    {
+     "name": "gpu-5",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 5
+      }
+     }
+    },
+    {
+     "name": "gpu-6",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 6
+      }
+     }
+    },
+    {
+     "name": "gpu-7",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 7
+      }
+     }
+    }
+   ]
+  }
+ },
+ {
+  "metadata": {
+   "name": "kind-worker2-gpu.example.com"
+  },
+  "spec": {
+   "driver": "gpu.example.com",
+   "pool": {
+    "name": "kind-worker2",
+    "generation": 1,
+    "resourceSliceCount": 1
+   },
+   "nodeName": "kind-worker2",
+   "devices": [
+    {
+     "name": "gpu-0",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 0
+      }
+     }
+    },
+    {
+     "name": "gpu-1",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 1
+      }
+     }
+    },
+    {
+     "name": "gpu-2",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 2
+      }
+     }
+    },
+    {
+     "name": "gpu-3",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 3
+      }
+     }
+    },
+    {
+     "name": "gpu-4",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 4
+      }
+     }
+    },
+    {
+     "name": "gpu-5",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 5
+      }
+     }
+    },
+    {
+     "name": "gpu-6",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 6
+      }
+     }
+    },
+    {
+     "name": "gpu-7",
+     "attributes": {
+      "model": {
+       "string": "LATEST-GPU-MODEL"
+      },
+      "memory": {
+       "string": "80Gi"
+      },
+      "driverVersion": {
+       "version": "1.0.0"
+      },
+      "index": {
+       "int": 7
+      }
+     }
+    }
+   ]
+  }
+ }
+]

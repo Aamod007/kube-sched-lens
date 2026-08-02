@@ -1,0 +1,30 @@
+[
+ {
+  "metadata": {
+   "name": "gpu.example.com"
+  },
+  "spec": {
+   "selectors": [
+    {
+     "cel": {
+      "expression": "device.driver == \"gpu.example.com\""
+     }
+    }
+   ]
+  }
+ },
+ {
+  "metadata": {
+   "name": "fpga.example.com"
+  },
+  "spec": {
+   "selectors": [
+    {
+     "cel": {
+      "expression": "device.driver == \"fpga.example.com\""
+     }
+    }
+   ]
+  }
+ }
+]

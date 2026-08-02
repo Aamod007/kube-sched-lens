@@ -1,0 +1,18 @@
+[
+  {
+    "metadata": {"name": "kind-worker", "labels": {"kubernetes.io/hostname": "kind-worker"}},
+    "status": {
+      "capacity": {"cpu": "8", "memory": "16Gi", "pods": "110"},
+      "allocatable": {"cpu": "8", "memory": "16Gi", "pods": "110"},
+      "conditions": [{"type": "Ready", "status": "True"}]
+    }
+  },
+  {
+    "metadata": {"name": "kind-worker2", "labels": {"kubernetes.io/hostname": "kind-worker2"}},
+    "status": {
+      "capacity": {"cpu": "8", "memory": "16Gi", "pods": "110"},
+      "allocatable": {"cpu": "8", "memory": "16Gi", "pods": "110"},
+      "conditions": [{"type": "Ready", "status": "True"}]
+    }
+  }
+]

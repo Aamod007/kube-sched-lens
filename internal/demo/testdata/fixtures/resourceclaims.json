@@ -1,0 +1,79 @@
+[
+ {
+  "metadata": {
+   "name": "gpu-pod-claim",
+   "namespace": "default"
+  },
+  "spec": {
+   "devices": {
+    "requests": [
+     {
+      "name": "gpu",
+      "exactly": {
+       "deviceClassName": "gpu.example.com",
+       "allocationMode": "ExactCount",
+       "count": 1
+      }
+     }
+    ]
+   }
+  },
+  "status": {
+   "allocation": {
+    "devices": {
+     "results": [
+      {
+       "request": "gpu",
+       "driver": "gpu.example.com",
+       "pool": "kind-worker",
+       "device": "gpu-0"
+      }
+     ]
+    },
+    "nodeSelector": {
+     "nodeSelectorTerms": [
+      {
+       "matchFields": [
+        {
+         "key": "metadata.name",
+         "operator": "In",
+         "values": [
+          "kind-worker"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "reservedFor": [
+    {
+     "resource": "pods",
+     "name": "gpu-pod-running",
+     "uid": "11111111-1111-1111-1111-111111111111"
+    }
+   ]
+  }
+ },
+ {
+  "metadata": {
+   "name": "fpga-pod-claim",
+   "namespace": "default"
+  },
+  "spec": {
+   "devices": {
+    "requests": [
+     {
+      "name": "fpga",
+      "exactly": {
+       "deviceClassName": "fpga.example.com",
+       "allocationMode": "ExactCount",
+       "count": 1
+      }
+     }
+    ]
+   }
+  },
+  "status": {}
+ }
+]
