@@ -95,10 +95,6 @@ cd app
 npm run build
 ```
 
-## Motivation
-
-Built while preparing a proposal for the LFX mentorship: [*Adding Dynamic Resource Allocation (DRA) to Headlamp*](https://github.com/kubernetes-sigs/headlamp). This served as a from-scratch exploration of the same problem space: making the massive DRA object graph easily navigable and debuggable for humans.
-
 ## License
 
 Licensed under [Apache-2.0](LICENSE).
